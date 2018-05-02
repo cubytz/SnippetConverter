@@ -24,6 +24,17 @@ class SnippetConverter
   }.freeze
 
   #
+  # Outputs info to the command line
+  #
+  def self.info
+    puts ''
+    puts "#{Gem.loaded_specs['snippet_converter'].name.camelize}, version #{VERSION}"
+    puts "#{Gem.loaded_specs['snippet_converter'].license} License"
+    puts 'Copyright (c) 2018 Jeremie Henri - Cubytz'
+    puts ''
+  end
+
+  #
   # Parse arguments
   #
   # @param [Array] args Array of arguments passed in cli
@@ -39,12 +50,6 @@ class SnippetConverter
     options.dest = 'snippets'
 
     opts = OptionParser.new do |op|
-      op.separator ''
-      op.banner = "SnippetConverter, version #{VERSION}"
-      op.banner = "#{Gem.loaded_specs['snippet_converter'].license} License"
-      op.banner = 'Copyright (c) 2018 Jeremie Henri - Cubytz'
-
-      op.separator ''
       op.banner = "Usage:\tsnippetconverter.rb [options]\n\tFile(s) or directory required"
 
       op.separator ''
@@ -85,6 +90,7 @@ class SnippetConverter
 
       # Print an options summary.
       op.on_tail('-h', '--help', 'Show this help message') do
+        info
         puts opts
         exit
       end
