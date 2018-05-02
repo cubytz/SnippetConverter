@@ -38,7 +38,7 @@ puts "#{files.count} files" if options.verbose
 exit unless files.size.positive?
 
 # Create the directory
-FileUtils.mkdir_p(options.output) unless Dir.exist?(options.output)
+FileUtils.mkdir_p(options.dest) unless Dir.exist?(options.dest)
 
 # Create a snippets hash
 snippets = {}
@@ -46,7 +46,7 @@ snippets = {}
 # Loop through the files
 files.each do |file|
   # Convert the files
-  snippet = SnippetConverter.convert(file)
+  snippet = SnippetConverter.convert_to_json(file)
   snippets[snippet[:prefix]] = snippet
   if options.verbose
     # puts "### #{snippet[:prefix]} ###"
