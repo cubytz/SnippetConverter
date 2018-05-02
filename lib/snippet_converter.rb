@@ -28,7 +28,7 @@ class SnippetConverter
   #
   def self.info
     puts ''
-    puts "#{Gem.loaded_specs['snippet_converter'].name.camelize}, version #{VERSION}"
+    puts "#{Gem.loaded_specs['snippet_converter'].name.classify}, version #{VERSION}"
     puts "#{Gem.loaded_specs['snippet_converter'].license} License"
     puts 'Copyright (c) 2018 Jeremie Henri - Cubytz'
     puts ''
