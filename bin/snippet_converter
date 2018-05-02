@@ -1,0 +1,70 @@
+#!/usr/bin/ruby -w
+# frozen_string_literal: true
+
+require 'snippet_converter'
+
+# Parse the options to the converter
+options = SnippetConverter.parse(ARGV)
+
+# File or Directory required
+unless options.file || options.directory
+  puts 'No file or directory passed'
+  exit
+end
+
+# Choose file over directory in case both are passed
+if options.file
+  unless File.directory?(options.file) || File.file?(options.file)
+    puts "#{options.file} is not a snippet file"
+    exit
+  end
+
+  files = options.file.split(',')
+elsif options.directory
+  unless File.directory?(options.directory) || File.file?(options.directory)
+    puts "#{options.directory} is not a directory"
+    exit
+  end
+
+  directory = options.directory
+  directory += '/' unless options.directory[-1] == '/'
+
+  files = Dir["#{directory}*.sublime-snippet"]
+end
+
+puts "#{files.count} files" if options.verbose
+
+# Exit if no file found
+exit unless files.size.positive?
+
+# Create the directory
+FileUtils.mkdir_p(options.output) unless Dir.exist?(options.output)
+
+# Create a snippets hash
+snippets = {}
+
+# Loop through the files
+files.each do |file|
+  # Convert the files
+  snippet = SnippetConverter.convert(file)
+  snippets[snippet[:prefix]] = snippet
+  if options.verbose
+    # puts "### #{snippet[:prefix]} ###"
+    # pp snippet.to_json
+  end
+end
+
+case options.split
+when true
+  snippets.each do |key, value|
+    snippet = {}
+    snippet[key] = value
+    SnippetConverter.output_file("#{options.output}/#{key}.json", snippet)
+  end
+when false
+  SnippetConverter.output_file("#{options.output}/snippets.json", snippets)
+end
+
+pp snippets if options.verbose
+
+puts 'Done'
