@@ -27,9 +27,12 @@ class SnippetConverter
   # Outputs info to the command line
   #
   def self.info
+    name = Gem.loaded_specs['snippet_converter'].name
+    name = name.split('_').map(&:capitalize).join
+    license = Gem.loaded_specs['snippet_converter'].license
     puts ''
-    puts "#{Gem.loaded_specs['snippet_converter'].name.classify}, version #{VERSION}"
-    puts "#{Gem.loaded_specs['snippet_converter'].license} License"
+    puts "#{name}, version #{VERSION}"
+    puts "#{license} License"
     puts 'Copyright (c) 2018 Jeremie Henri - Cubytz'
     puts ''
   end
