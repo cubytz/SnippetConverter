@@ -23,9 +23,11 @@ Gem::Specification.new do |spec|
       'public gem pushes.'
   end
 
-  spec.files         = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+    f.match(%r{^(test|spec|features)/})
+  end
   spec.bindir        = '/usr/bin'
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.executables   = spec.files.grep(%r{^bin/})
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.16'
