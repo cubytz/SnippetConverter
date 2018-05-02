@@ -14,7 +14,6 @@ require 'snippet_converter/version'
 class SnippetConverter
   include REXML
 
-  VERSION = 0.1
   KEYS = {
     content: 'body',
     tabTrigger: 'prefix',
