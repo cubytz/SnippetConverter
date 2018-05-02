@@ -50,7 +50,7 @@ class SnippetConverter
     options.verbose = false
     options.split = false
     options.output = 'json'
-    options.dest = 'snippets'
+    options.destination = 'snippets'
 
     opts = OptionParser.new do |op|
       op.banner = "Usage:\tsnippetconverter.rb [options]\n\tFile(s) or directory required"

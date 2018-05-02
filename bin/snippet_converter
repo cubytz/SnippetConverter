@@ -38,7 +38,7 @@ puts "#{files.count} files" if options.verbose
 exit unless files.size.positive?
 
 # Create the directory
-FileUtils.mkdir_p(options.dest) unless Dir.exist?(options.dest)
+FileUtils.mkdir_p(options.destination) unless Dir.exist?(options.destination)
 
 # Create a snippets hash
 snippets = {}
@@ -46,7 +46,7 @@ snippets = {}
 # Loop through the files
 files.each do |file|
   # Convert the files
-  snippet = SnippetConverter.convert_to_json(file)
+  snippet = SnippetConverter.convert_to_vsc(file)
   snippets[snippet[:prefix]] = snippet
   if options.verbose
     # puts "### #{snippet[:prefix]} ###"
@@ -59,12 +59,14 @@ when true
   snippets.each do |key, value|
     snippet = {}
     snippet[key] = value
-    SnippetConverter.output_file("#{options.output}/#{key}.json", snippet)
+    filename = "#{options.destination}/#{key}.#{options.output}"
+    SnippetConverter.write_file(filename, snippet)
   end
 when false
-  SnippetConverter.output_file("#{options.output}/snippets.json", snippets)
+  filename = "#{options.destination}/snippets.#{options.output}"
+  SnippetConverter.write_file(filename, snippets)
 end
 
-pp snippets if options.verbose
+puts JSON.pretty_generate(snippets) if options.verbose
 
 puts 'Done'
