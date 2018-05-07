@@ -74,12 +74,12 @@ class SnippetConverter
       end
 
       # Output
-      op.on('-o', '--output output', 'Output format (json)') do |o|
+      op.on('-o', '--output output', 'Output format (default: json)') do |o|
         options.output = o
       end
 
       # Destination folder
-      op.on('--destination destination', 'Destination directory (snippets)') do |dest|
+      op.on('--destination destination', 'Destination directory (default: snippets)') do |dest|
         options.destination = dest
       end
 

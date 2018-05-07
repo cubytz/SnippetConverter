@@ -14,14 +14,14 @@ end
 
 # Choose file over directory in case both are passed
 if options.file
-  unless File.directory?(options.file) || File.file?(options.file)
+  if File.directory?(options.file) || !File.file?(options.file)
     puts "#{options.file} is not a snippet file"
     exit
   end
 
   files = options.file.split(',')
 elsif options.directory
-  unless File.directory?(options.directory) || File.file?(options.directory)
+  if !File.directory?(options.directory) || File.file?(options.directory)
     puts "#{options.directory} is not a directory"
     exit
   end
