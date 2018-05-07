@@ -12,3 +12,6 @@
 .rspec_status
 .ruby-version
 .ruby-gemset
+
+# Gems
+*.gem

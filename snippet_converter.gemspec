@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Jeremie Henri']
   spec.email         = ['jeremie@cubytz.com']
 
-  spec.summary       = 'Simple Ruby Gem that convert Sublime Text Snippets to Visual Studio Code format'
-  spec.description   = 'Simple Ruby Gem that convert Sublime Text Snippets to Visual Studio Code format'
+  spec.summary       = 'CLI Converter for Sublime Snippets to Visual Studio Code format'
+  spec.description   = 'Simple command-line tool to convert Sublime Text Snippets to Visual Studio Code format'
   spec.homepage      = 'https://github.com/cubytz/SnippetConverter'
   spec.license       = 'MIT'
 
